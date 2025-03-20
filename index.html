@@ -5,6 +5,72 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HTML Preview & Export Tool</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #FAFAFA;
+    color: #284E80;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 800px;
+    margin: 20px;
+  }
+  textarea {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    border: 1px solid #284E80;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  iframe {
+    width: 100%;
+    height: 300px;
+    border: 1px solid #284E80;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .buttons button {
+    background-color: #284E80;
+    color: #FAFAFA;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .buttons button:hover {
+    background-color: #1F3A60;
+  }
+  .download-name {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .download-name input {
+    width: calc(100% - 130px);
+    padding: 10px;
+    border: 1px solid #284E80;
+    border-radius: 5px;
+  }
+</style>
 </head>
 <body>
 <h1>HTML Preview & Export Tool</h1>
@@ -14,6 +80,12 @@
 
   <!-- Live Preview Area -->
   <iframe id="preview"></iframe>
+
+  <!-- Customizable Download Name -->
+  <div class="download-name">
+    <label for="downloadName">Download Name:</label>
+    <input type="text" id="downloadName" placeholder="Enter file name...">
+  </div>
 </div>
 
 <!-- Buttons -->
@@ -22,6 +94,26 @@
   <button class="export" onclick="exportHTML()">Export as File</button>
 </div>
 
-<script src="script.js"></script>
+<script>
+  function updatePreview() {
+    const htmlInput = document.getElementById('htmlInput').value;
+    const previewFrame = document.getElementById('preview').contentDocument;
+    previewFrame.open();
+    previewFrame.write(htmlInput);
+    previewFrame.close();
+  }
+
+  function exportHTML() {
+    const htmlInput = document.getElementById('htmlInput').value;
+    const downloadName = document.getElementById('downloadName').value || 'download';
+    const blob = new Blob([htmlInput], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${downloadName}.html`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
 </body>
 </html>
