@@ -93,7 +93,8 @@
 <!-- Buttons -->
 <div class="buttons">
   <button class="preview" onclick="updatePreview()">Update Preview</button>
-  <button class="export" onclick="exportHTML()">Export as File</button>
+  <button class="export" onclick="exportHTML()">Export as HTML File</button>
+  <button class="export-oft" onclick="exportOFT()">Export as OFT File</button>
 </div>
 
 <script>
@@ -113,6 +114,18 @@
     const a = document.createElement('a');
     a.href = url;
     a.download = `${downloadName}.html`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function exportOFT() {
+    const htmlInput = document.getElementById('htmlInput').value;
+    const downloadName = document.getElementById('downloadName').value || 'download';
+    const blob = new Blob([htmlInput], { type: 'application/vnd.ms-outlook' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${downloadName}.oft`;
     a.click();
     URL.revokeObjectURL(url);
   }
