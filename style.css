@@ -34,7 +34,7 @@ iframe {
 
 .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center the buttons horizontally */
     width: 100%;
 }
 
