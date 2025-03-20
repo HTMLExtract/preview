@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Preview & Export Tool</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>HTML Preview & Export Tool</h1>
+<div class="container">
+  <!-- Textarea for HTML Input -->
+  <textarea id="htmlInput" placeholder="Write your HTML code here..."></textarea>
+
+  <!-- Live Preview Area -->
+  <iframe id="preview"></iframe>
+</div>
+
+<!-- Buttons -->
+<div class="buttons">
+  <button class="preview" onclick="updatePreview()">Update Preview</button>
+  <button class="export" onclick="exportHTML()">Export as File</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
