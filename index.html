@@ -43,7 +43,8 @@
   }
   .buttons {
     display: flex;
-    justify-content: space-between; /* Change to space-between for closer buttons */
+    flex-direction: column;
+    align-items: center; /* Center the buttons */
     width: 100%;
   }
   .buttons button {
@@ -53,7 +54,7 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    margin: 0 2px; /* Adjust the margin to control spacing between buttons */
+    margin: 5px 0; /* Adjust the margin to control spacing between buttons */
   }
   .buttons button:hover {
     background-color: #1F3A60;
