@@ -33,15 +33,19 @@ iframe {
 }
 
 .buttons {
-    display: flex;
-    justify-content: center; /* Center the buttons horizontally */
-    width: 100%;
+  display: flex;
+  justify-content: space-between; /* Change to space-between for closer buttons */
+  width: 100%;
 }
 
-button {
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
+.buttons button {
+  background-color: #284E80;
+  color: #FAFAFA;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 2px; /* Adjust the margin to control spacing between buttons */
 }
 
 @media screen and (max-width: 600px) {
