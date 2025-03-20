@@ -116,6 +116,9 @@
     a.click();
     URL.revokeObjectURL(url);
   }
+
+  // Add event listener to update preview automatically
+  document.getElementById('htmlInput').addEventListener('input', updatePreview);
 </script>
 </body>
 </html>
