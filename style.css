@@ -1,39 +1,46 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #FAFAFA;
+    color: #284E80;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
     width: 100%;
-    max-width: 600px; /* Max width for email compatibility */
+    max-width: 800px;
     margin: 0 auto;
     padding: 10px;
     box-sizing: border-box;
 }
 
 textarea {
-    width: 100%;
-    height: 150px;
-    margin-bottom: 10px;
+    width: 50%;
+    height: 500px;
+    margin-right: 10px;
     padding: 10px;
     box-sizing: border-box;
     resize: none;
 }
 
 iframe {
-    width: 100%;
-    height: 300px;
+    width: 50%;
+    height: 500px;
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
 
 .buttons {
     display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: center; /* Center the buttons horizontally */
+    flex-direction: column;
+    align-items: center;
     width: 100%;
 }
 
@@ -44,20 +51,15 @@ iframe {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    margin: 5px 0; /* Adjust the margin to control spacing between buttons */
+    margin: 5px 0;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .container {
-        width: 100%;
-    }
-
-    .buttons {
         flex-direction: column;
     }
-
-    button {
+    textarea, iframe {
         width: 100%;
-        margin: 5px 0;
+        margin: 0 0 10px 0;
     }
 }
