@@ -21,13 +21,13 @@
       flex-direction: row;
       align-items: flex-start;
       width: 100%;
-      max-width: 800px;
+      max-width: 1000px; /* Increased width */
       margin: 0 auto;
       padding: 10px;
       box-sizing: border-box;
     }
     textarea {
-      width: 50%;
+      width: 60%; /* Increased width */
       height: 500px;
       margin-right: 10px;
       padding: 10px;
@@ -35,9 +35,19 @@
       resize: none;
     }
     iframe {
-      width: 50%;
+      width: 60%; /* Increased width */
       height: 500px;
       border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .download-name {
+      width: 100%;
+      max-width: 1000px; /* Match container width */
+      margin: 10px 0;
+    }
+    .download-name input {
+      width: 100%; /* Full width for file name input */
+      padding: 10px;
       box-sizing: border-box;
     }
     .buttons {
@@ -55,13 +65,19 @@
       cursor: pointer;
       margin: 5px 0;
     }
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 1000px) {
       .container {
         flex-direction: column;
       }
       textarea, iframe {
         width: 100%;
         margin: 0 0 10px 0;
+      }
+      .download-name {
+        width: 100%;
+      }
+      .download-name input {
+        width: 100%;
       }
     }
   </style>
