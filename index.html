@@ -4,14 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HTML Preview & Export Tool</title>
-  <link rel="stylesheet" href="style.css">
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background-color: #FAFAFA;
       color: #284E80;
-      margin: 0;
-      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -20,31 +18,32 @@
     }
     .container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 80%;
+      flex-direction: row;
+      align-items: flex-start;
+      width: 100%;
       max-width: 800px;
-      margin: 20px;
+      margin: 0 auto;
+      padding: 10px;
+      box-sizing: border-box;
     }
     textarea {
-      width: 100%;
-      height: 200px;
+      width: 50%;
+      height: 500px;
+      margin-right: 10px;
       padding: 10px;
-      border: 1px solid #284E80;
-      border-radius: 5px;
-      margin-bottom: 20px;
+      box-sizing: border-box;
+      resize: none;
     }
     iframe {
-      width: 100%;
-      height: 300px;
-      border: 1px solid #284E80;
-      border-radius: 5px;
-      margin-bottom: 20px;
+      width: 50%;
+      height: 500px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
     }
     .buttons {
       display: flex;
-      flex-direction: column; /* Stack buttons vertically */
-      align-items: center; /* Center the buttons horizontally */
+      flex-direction: column;
+      align-items: center;
       width: 100%;
     }
     .buttons button {
@@ -54,23 +53,16 @@
       padding: 10px 20px;
       border-radius: 5px;
       cursor: pointer;
-      margin: 5px 0; /* Adjust the margin to control spacing between buttons */
+      margin: 5px 0;
     }
-    .buttons button:hover {
-      background-color: #1F3A60;
-    }
-    .download-name {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .download-name input {
-      width: calc(100% - 130px);
-      padding: 10px;
-      border: 1px solid #284E80;
-      border-radius: 5px;
+    @media screen and (max-width: 800px) {
+      .container {
+        flex-direction: column;
+      }
+      textarea, iframe {
+        width: 100%;
+        margin: 0 0 10px 0;
+      }
     }
   </style>
 </head>
@@ -82,63 +74,45 @@
 
     <!-- Live Preview Area -->
     <iframe id="preview"></iframe>
+  </div>
 
-    <!-- Customizable Download Name -->
-    <div class="download-name">
-      <label for="downloadName">Download Name:</label>
-      <input type="text" id="downloadName" placeholder="Enter file name...">
-    </div>
+  <!-- Customizable Download Name -->
+  <div class="download-name">
+    <label for="downloadName">Download Name:</label>
+    <input type="text" id="downloadName" placeholder="Enter file name...">
   </div>
 
   <!-- Buttons -->
   <div class="buttons">
     <button class="preview" onclick="updatePreview()">Update Preview</button>
     <button class="export" onclick="exportHTML()">Export as HTML File</button>
-    <button class="export-oft" onclick="exportOFT()">Export as OFT File</button>
   </div>
 
   <script>
+    // Function to update the live preview
     function updatePreview() {
-      const htmlInput = document.getElementById('htmlInput').value;
-      const previewFrame = document.getElementById('preview').contentDocument;
-      previewFrame.open();
-      previewFrame.write(htmlInput);
-      previewFrame.close();
+      const htmlCode = document.getElementById('htmlInput').value;
+      const previewFrame = document.getElementById('preview');
+      previewFrame.srcdoc = htmlCode; // Set the iframe's content
     }
 
+    // Function to export the HTML code as a file
     function exportHTML() {
-      const htmlInput = document.getElementById('htmlInput').value;
-      const downloadName = document.getElementById('downloadName').value || 'download';
-      const blob = new Blob([htmlInput], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${downloadName}.html`;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
+      const htmlCode = document.getElementById('htmlInput').value;
 
-    function exportOFT() {
-      const htmlInput = document.getElementById('htmlInput').value;
-      const downloadName = document.getElementById('downloadName').value || 'download';
-      const oftContent = `
-        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
-        <html>
-        <head>
-          <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
-        </head>
-        <body>
-          ${htmlInput}
-        </body>
-        </html>
-      `;
-      const blob = new Blob([oftContent], { type: 'application/vnd.ms-outlook' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${downloadName}.oft`;
-      a.click();
-      URL.revokeObjectURL(url);
+      // Create a Blob object with the HTML code
+      const blob = new Blob([htmlCode], { type: 'text/html' });
+
+      // Create a temporary anchor element
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'exported.html'; // Name of the exported file
+
+      // Trigger the download
+      link.click();
+
+      // Clean up the temporary URL
+      URL.revokeObjectURL(link.href);
     }
 
     // Add event listener to update preview automatically
